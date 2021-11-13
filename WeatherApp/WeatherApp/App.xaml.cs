@@ -1,16 +1,15 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using Prism;
+using Prism.DryIoc;
+using Prism.Ioc;
+using System;
 
 namespace WeatherApp
 {
-    public partial class App : Application
+    public partial class App : PrismApplication
     {
-        public App()
+        public App(IPlatformInitializer platformInitializer) : base(platformInitializer)
         {
             InitializeComponent();
-
-            MainPage = new MainPage();
         }
 
         protected override void OnStart()
@@ -23,6 +22,17 @@ namespace WeatherApp
 
         protected override void OnResume()
         {
+        }
+
+
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void OnInitialized()
+        {
+            throw new NotImplementedException();
         }
     }
 }
