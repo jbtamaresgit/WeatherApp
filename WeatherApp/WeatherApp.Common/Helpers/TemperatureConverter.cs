@@ -1,10 +1,12 @@
-﻿namespace WeatherApp.Common.Helpers
+﻿using System;
+
+namespace WeatherApp.Common.Helpers
 {
     public static class TemperatureConverter
     {
-        public static double FahrenheitToCelsius(double temp)
+        public static double KelvinToCelsius(double temp)
         {
-            return (5.0 / 9.0) * (temp - 32);
+            return Math.Round(temp - 273.15);
         }
     }
 }

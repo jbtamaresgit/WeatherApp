@@ -8,7 +8,7 @@ namespace APIService.OneCallWeather
     {
         public async Task<CurrentWeatherContract> GetCurrentWeather(WeatherApiModel model)
         {
-            string endPoint = $"onecall?lat={model.lat}&lon={model.lon}&appid={BaseAPIKey}";
+            string endPoint = $"onecall?lat={model.lat}&lon={model.lon}&exclude=hourly,daily,minutely&appid={BaseAPIKey}";
             CurrentWeatherContract result = await GetAsync<CurrentWeatherContract>(endPoint);
             return result;
         }

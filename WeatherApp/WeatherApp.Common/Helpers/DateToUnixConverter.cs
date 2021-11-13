@@ -6,7 +6,7 @@ namespace WeatherApp.Common.Helpers
     {
         public static int GetUnixDateTime(DateTime date)
         {
-            return (int)date.Subtract(new DateTime(1970, 1, 1)).TotalDays;
+            return (int)Math.Truncate(date.ToUniversalTime().Subtract(new DateTime(1970, 1, 1)).TotalSeconds);
         }
     }
 }
