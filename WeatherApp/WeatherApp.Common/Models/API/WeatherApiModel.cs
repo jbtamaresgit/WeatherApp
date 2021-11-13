@@ -2,7 +2,7 @@
 {
     public class WeatherApiModel
     {
-        public int lat { get; set; }
-        public int lon { get; set; }
+        public double lat { get; set; }
+        public double lon { get; set; }
     }
 }

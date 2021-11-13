@@ -7,7 +7,7 @@ using WeatherApp.Common.Models.API;
 
 namespace Managers.OneCallWeather
 {
-    class OneCallManager : BaseManager, IOneCallManager
+    public class OneCallManager : BaseManager, IOneCallManager
     {
         readonly IOneCallApiService OneCallApiService;
         readonly IOneCallWeatherMapper OneCallWeatherMapper;

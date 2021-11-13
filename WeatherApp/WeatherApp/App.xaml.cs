@@ -1,7 +1,12 @@
-﻿using Prism;
+﻿using APIService.OneCallWeather;
+using Managers.OneCallWeather;
+using Managers.OneCallWeather.Mapper;
+using Prism;
 using Prism.DryIoc;
 using Prism.Ioc;
 using System;
+using WeatherApp.ViewModels;
+using WeatherApp.Views;
 
 namespace WeatherApp
 {
@@ -27,12 +32,15 @@ namespace WeatherApp
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            throw new NotImplementedException();
+            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterSingleton<IOneCallWeatherMapper, OneCallWeatherMapper>();
+            containerRegistry.RegisterSingleton<IOneCallManager, OneCallManager>();
+            containerRegistry.RegisterSingleton<IOneCallApiService, OneCallApiService>();
         }
 
         protected override void OnInitialized()
         {
-            throw new NotImplementedException();
+            NavigationService.NavigateAsync("MainPage");
         }
     }
 }
