@@ -18,7 +18,7 @@ namespace APIService
         protected HttpClient HttpClient;
         private HttpResponseMessage HttpResponseMessage;
         private Stream JsonStreamResponse = null;
-        protected string BaseAPIKey = "cec4e888e92eea478381c575b3e21497";
+        protected string BaseAPIKey = "";
 
 #if DEBUG
         private static readonly string WeatherAPIBaseAddress = @"https://api.openweathermap.org/data/2.5/";
@@ -26,7 +26,7 @@ namespace APIService
         public static readonly string WeatherAPIBaseAddress = @"https://api.openweathermap.org/data/2.5/"; 
 #endif
         public static string AccessToken { get; set; }
-        private Uri WeatherAPIBaseAddressUri;
+        private readonly Uri WeatherAPIBaseAddressUri;
         private BaseContract BaseContract;
 
         protected BaseAPIService(Action<HttpClient> httpClientModifier = null)
