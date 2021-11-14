@@ -11,8 +11,8 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <!--Current Day and Time-->
                 <StackLayout Grid.Row="0" Orientation="Vertical" Spacing="10">
@@ -76,10 +76,13 @@
                 </CollectionView>
 
                 <controls:Calendar SelectedDate="{Binding DateToday}" Grid.Row="4" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                               MonthLabelColor="Red" YearLabelColor="Blue" EventIndicatorColor="Red" EventIndicatorSelectedColor="White"
-                               DaysTitleColor="Orange" DeselectedDayTextColor="Blue" OtherMonthDayColor="Gray" SelectedDayTextColor="Cyan"
-                               SelectedDayBackgroundColor="DarkCyan" SelectedDateColor="Red" SelectedTodayTextColor="Green" TodayOutlineColor="Blue"
-                               TodayFillColor="Silver" TodayTextColor="Yellow"/>
+                                   MonthLabelColor="Red" YearLabelColor="Blue" EventIndicatorColor="Red" EventIndicatorSelectedColor="White"
+                                   DaysTitleColor="Orange" DeselectedDayTextColor="Blue" OtherMonthDayColor="Gray" SelectedDayTextColor="Cyan"
+                                   SelectedDayBackgroundColor="DarkCyan" SelectedDateColor="Red" SelectedTodayTextColor="Green" TodayOutlineColor="Blue"
+                                   TodayFillColor="Silver" TodayTextColor="Yellow"/>
+
+                <Button Command="{Binding AddNotesCommand}" CornerRadius="20" WidthRequest="40" HeightRequest="40" Text="+" TextColor="White" 
+                        BackgroundColor="Black" FontAttributes="Bold" HorizontalOptions="End" VerticalOptions="End" Margin="15"/>
 
             </Grid>
         </ScrollView>

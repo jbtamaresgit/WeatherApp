@@ -1,5 +1,6 @@
 ﻿using Managers.OneCallWeather;
 using MvvmHelpers;
+using Prism.Commands;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
@@ -84,6 +85,16 @@ namespace WeatherApp.ViewModels
             get { return _Events; }
             set { SetProperty(ref _Events, value); }
         }
+
+        private DelegateCommand _AddNotesCommand;
+        public DelegateCommand AddNotesCommand =>
+            _AddNotesCommand ?? (_AddNotesCommand = new DelegateCommand(ExecuteAddNotesCommand));
+
+        void ExecuteAddNotesCommand()
+        {
+            base.NextAsync("AddNotesPage");
+        }
+
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {

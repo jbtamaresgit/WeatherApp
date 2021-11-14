@@ -1,9 +1,12 @@
 ﻿using APIService.OneCallWeather;
+using Managers.Notes;
 using Managers.OneCallWeather;
 using Managers.OneCallWeather.Mapper;
 using Prism;
 using Prism.DryIoc;
 using Prism.Ioc;
+using Repository.Database;
+using Repository.Repositories.Notes;
 using System;
 using WeatherApp.ViewModels;
 using WeatherApp.Views;
@@ -36,6 +39,11 @@ namespace WeatherApp
             containerRegistry.RegisterSingleton<IOneCallWeatherMapper, OneCallWeatherMapper>();
             containerRegistry.RegisterSingleton<IOneCallManager, OneCallManager>();
             containerRegistry.RegisterSingleton<IOneCallApiService, OneCallApiService>();
+
+            containerRegistry.RegisterForNavigation<AddNotesPage, AddNotesViewModel>();
+            containerRegistry.RegisterSingleton<INotesManager, NotesManager>();
+            containerRegistry.RegisterSingleton<IDatabaseService, DatabaseService>();
+            containerRegistry.RegisterSingleton<INotesRepository, NotesRepository>();
         }
 
         protected override void OnInitialized()
