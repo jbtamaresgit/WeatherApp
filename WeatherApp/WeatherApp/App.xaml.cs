@@ -38,7 +38,7 @@ namespace WeatherApp
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
 
-            containerRegistry.RegisterForNavigation<MainPage_2, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterSingleton<IOneCallWeatherMapper, OneCallWeatherMapper>();
             containerRegistry.RegisterSingleton<IOneCallManager, OneCallManager>();
             containerRegistry.RegisterSingleton<IOneCallApiService, OneCallApiService>();
@@ -51,7 +51,7 @@ namespace WeatherApp
 
         protected override void OnInitialized()
         {
-            NavigationService.NavigateAsync("MainPage_2");
+            NavigationService.NavigateAsync("MainPage");
         }
     }
 }
