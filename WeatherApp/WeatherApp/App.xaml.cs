@@ -1,16 +1,24 @@
-﻿using System;
+﻿using APIService.OneCallWeather;
+using Managers.Notes;
+using Managers.OneCallWeather;
+using Managers.OneCallWeather.Mapper;
+using Prism;
+using Prism.DryIoc;
+using Prism.Ioc;
+using Repository.Database;
+using Repository.Repositories.Notes;
+using System;
+using WeatherApp.ViewModels;
+using WeatherApp.Views;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace WeatherApp
 {
-    public partial class App : Application
+    public partial class App : PrismApplication
     {
-        public App()
+        public App(IPlatformInitializer platformInitializer) : base(platformInitializer)
         {
             InitializeComponent();
-
-            MainPage = new MainPage();
         }
 
         protected override void OnStart()
@@ -23,6 +31,27 @@ namespace WeatherApp
 
         protected override void OnResume()
         {
+        }
+
+
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
+        {
+            containerRegistry.RegisterForNavigation<NavigationPage>();
+
+            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterSingleton<IOneCallWeatherMapper, OneCallWeatherMapper>();
+            containerRegistry.RegisterSingleton<IOneCallManager, OneCallManager>();
+            containerRegistry.RegisterSingleton<IOneCallApiService, OneCallApiService>();
+
+            containerRegistry.RegisterForNavigation<AddNotesPage, AddNotesViewModel>();
+            containerRegistry.RegisterSingleton<INotesManager, NotesManager>();
+            containerRegistry.RegisterSingleton<IDatabaseService, DatabaseService>();
+            containerRegistry.RegisterSingleton<INotesRepository, NotesRepository>();
+        }
+
+        protected override void OnInitialized()
+        {
+            NavigationService.NavigateAsync("MainPage");
         }
     }
 }
