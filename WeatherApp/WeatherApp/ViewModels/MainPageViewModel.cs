@@ -1,4 +1,5 @@
-﻿using Managers.OneCallWeather;
+﻿using Managers.Notes;
+using Managers.OneCallWeather;
 using MvvmHelpers;
 using Prism.Commands;
 using Prism.Navigation;
@@ -17,10 +18,13 @@ namespace WeatherApp.ViewModels
     public class MainPageViewModel : BaseViewModel
     {
         readonly IOneCallManager OneCallManager;
+        readonly INotesManager NotesManager;
 
-        public MainPageViewModel(INavigationService navigationService, IOneCallManager oneCallManager) : base(navigationService)
+        public MainPageViewModel(INavigationService navigationService, IOneCallManager oneCallManager,
+            INotesManager notesManager) : base(navigationService)
         {
             OneCallManager = oneCallManager;
+            NotesManager = notesManager;
         }
 
         private string _Humidity;
@@ -98,6 +102,7 @@ namespace WeatherApp.ViewModels
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
+            //fetch current location
             var location = await Geolocation.GetLocationAsync();
             GetCurrentDay();
 
@@ -116,12 +121,40 @@ namespace WeatherApp.ViewModels
                     lon = weatherApiModel.lon
                 };
 
+                //fetch previous 4 days, current forecast is excluded
                 int prevDays = -4;
                 WeatherHistoryList = new ObservableRangeCollection<HistoryWeatherModel>();
                 for (int x = 0; x < 4; x++)
                 { 
                     await Get5DaysHistoricalWeather(historicalWeatherApiModel, DateTime.Today.AddDays(prevDays++));
                     _ = WeatherHistoryList.Reverse();
+                }
+            }
+
+            GetNotes();
+
+        }
+
+        private void GetNotes()
+        {
+            //fetch current month notes 
+            var result = NotesManager.GetCurrentMonthNotes(DateTime.Now)
+                .OrderBy(x => x.Day);
+
+            if (result != null && result.Count() > 0)
+            {
+                Events = new EventCollection();
+                foreach (var item in result)
+                {
+                    var itemDate = new DateTime(item.Year, item.Month, item.Day);
+                    Events.Add(itemDate, new List<EventModel>
+                    {
+                        new EventModel
+                        {
+                            Title = item.Title,
+                            Content = item.Content
+                        }
+                    });
                 }
             }
         }
@@ -146,7 +179,7 @@ namespace WeatherApp.ViewModels
                 var result = await OneCallManager.GetHistoricalWeather(historicalWeatherApiModel);
                 //get the current weather
                 var getCurrentWeather = result.current.weather.FirstOrDefault();
-                //convert fahrenheit to celsius
+                //convert kelvin to celsius
                 var TempCelsius = TemperatureConverter.KelvinToCelsius(result.current.temp);
                 WeatherHistoryList.Add(new HistoryWeatherModel
                 {

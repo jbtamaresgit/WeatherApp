@@ -1,12 +1,13 @@
 ﻿using Contracts.RepositoryContracts.Notes;
 using System;
-using System.Linq;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Managers.Notes
 {
     public interface INotesManager
     {
-        IQueryable<NotesContract> GetCurrentMonthNotes(DateTime currMonth);
-        void AddNote();
+        IEnumerable<NotesContract> GetCurrentMonthNotes(DateTime currDate);
+        Task<bool> AddNote(NotesContract test);
     }
 }

@@ -8,7 +8,7 @@ namespace Repository.Database
     public class DatabaseService : IDatabaseService
     {
         private static object _locker = new object();
-        private RealmConfiguration cfg;
+        private readonly RealmConfiguration cfg;
         public DatabaseService()
         {
             lock (_locker)

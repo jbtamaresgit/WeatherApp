@@ -2,10 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Visual="Material"
+             xmlns:controls="clr-namespace:Xamarin.Plugin.Calendar.Controls;assembly=Xamarin.Plugin.Calendar"
+             BackgroundColor="White"
              x:Class="WeatherApp.Views.AddNotesPage">
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical" Spacing="10" Padding="10"> 
-            
+        <StackLayout Orientation="Vertical" Spacing="10" Padding="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Entry Placeholder="Title" PlaceholderColor="Gray" BackgroundColor="White" Text="{Binding Title}" TextColor="Black" FontSize="12"/>
+            <Editor Placeholder="Notes" PlaceholderColor="Gray" BackgroundColor="White" Text="{Binding Content}" TextColor="Black" FontSize="12"/>
+            <DatePicker x:Name="DatePicker" BackgroundColor="White" TextColor="Black" Date="{Binding SelectedDate}"/>
+            <Button Command="{Binding AddNotesCommand}" Text="Add Note" TextColor="White" BackgroundColor="Black" HeightRequest="50" VerticalOptions="EndAndExpand"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

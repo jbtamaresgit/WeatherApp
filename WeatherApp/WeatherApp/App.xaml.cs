@@ -10,6 +10,7 @@ using Repository.Repositories.Notes;
 using System;
 using WeatherApp.ViewModels;
 using WeatherApp.Views;
+using Xamarin.Forms;
 
 namespace WeatherApp
 {
@@ -35,7 +36,9 @@ namespace WeatherApp
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<NavigationPage>();
+
+            containerRegistry.RegisterForNavigation<MainPage_2, MainPageViewModel>();
             containerRegistry.RegisterSingleton<IOneCallWeatherMapper, OneCallWeatherMapper>();
             containerRegistry.RegisterSingleton<IOneCallManager, OneCallManager>();
             containerRegistry.RegisterSingleton<IOneCallApiService, OneCallApiService>();
@@ -48,7 +51,7 @@ namespace WeatherApp
 
         protected override void OnInitialized()
         {
-            NavigationService.NavigateAsync("MainPage");
+            NavigationService.NavigateAsync("MainPage_2");
         }
     }
 }
