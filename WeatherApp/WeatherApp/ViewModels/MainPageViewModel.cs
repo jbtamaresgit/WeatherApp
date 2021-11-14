@@ -9,6 +9,7 @@ using WeatherApp.Common.Helpers;
 using WeatherApp.Common.Models.API;
 using WeatherApp.Common.Models.Collections;
 using Xamarin.Essentials;
+using Xamarin.Plugin.Calendar.Models;
 
 namespace WeatherApp.ViewModels
 {
@@ -63,11 +64,25 @@ namespace WeatherApp.ViewModels
             set { SetProperty(ref _Time, value); }
         }
 
+        private DateTime _DateToday = DateTime.Now.Date;
+        public DateTime DateToday
+        {
+            get { return _DateToday; }
+            set { SetProperty(ref _DateToday, value); }
+        }
+
         private ObservableRangeCollection<HistoryWeatherModel> _WeatherHistoryList;
         public ObservableRangeCollection<HistoryWeatherModel> WeatherHistoryList
         {
             get { return _WeatherHistoryList; }
             set { SetProperty(ref _WeatherHistoryList, value); }
+        }
+
+        private EventCollection _Events;
+        public EventCollection Events
+        {
+            get { return _Events; }
+            set { SetProperty(ref _Events, value); }
         }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
